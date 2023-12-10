@@ -66,8 +66,8 @@ open class UnityPlayerDreamService : DreamService(), KeyEvent.Callback,
         this.isFullscreen = true
 
         // 画面をタッチで閉じるような動作をUnityのマネージドコードで
-        // 実装したいときはこれを false にする
-        // Make it false when do I want to implement some features
+        // 実装したいときはこれを true にする
+        // Make it true when do I want to implement some features
         // such as Touch To Quit by Unity managed code
         this.isInteractive = false
 
