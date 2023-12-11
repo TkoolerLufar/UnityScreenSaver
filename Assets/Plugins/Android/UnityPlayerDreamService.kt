@@ -69,7 +69,7 @@ open class UnityPlayerDreamService : DreamService(), KeyEvent.Callback,
         // 実装したいときはこれを true にする
         // Make it true when do I want to implement some features
         // such as Touch To Quit by Unity managed code
-        this.isInteractive = false
+        this.isInteractive = true
 
         // コマンドライン引数を整える
         // Format a command line args

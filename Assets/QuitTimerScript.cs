@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class QuitTimerScript : MonoBehaviour
 {
     public float QuitSecondsAfterBoot;
+    private Vector3 prevMousePosition = Vector3.left;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +18,33 @@ public class QuitTimerScript : MonoBehaviour
     {
         // ぐるぐる回す
         this.transform.eulerAngles += new Vector3(0.0F, 0.0F, 6.0F);
+
+        bool isPreview = PlayerPrefs.GetInt("isPreview") != 0;
+        if (isPreview)
+        {
+            return;
+        }
+
+        // Quit if the screen is be touched
+        if (Input.touchCount > 0)
+        {
+            Quit();
+        }
+
+        var currentMousePosition = Input.mousePosition;
+        try
+        {
+            var mouseVelocity = currentMousePosition - prevMousePosition;
+            if (prevMousePosition != Vector3.left &&
+            mouseVelocity != Vector3.zero)
+            {
+                Quit();
+            }
+        }
+        finally
+        {
+            prevMousePosition = currentMousePosition;
+        }
     }
 
     IEnumerator<YieldInstruction> QuitTimerRoutine()
