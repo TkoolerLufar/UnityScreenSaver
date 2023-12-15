@@ -24,21 +24,21 @@ Android スクリーンセーバー（通称Daydream、なおVRプラットフ�
 Windows用のファイル
 -------------------
 
-Windowsスクリーンセーバーのランチャーを ExternalPrograms/Windows 以下に作りました。
+Windowsスクリーンセーバーのランチャーを ExternalPrograms/Windows/UnityScreenSaverLauncher 以下に作りました。
 
 ビルド手順:
 
 1. あらかじめ Visual Studio に ".NET デスクトップ開発" 機能を入れておく
 2. このUnityプロジェクトをUnityで開いて *Build/Windows* にビルド
-3. *ExternalPrograms/Windows/UnityScreenSaverLauncher.sln* を開く
+3. *ExternalPrograms/Windows/UnityScreenSaverLauncher/UnityScreenSaverLauncher.sln* を開く
 4. そのソリューションを**発行**する。これでUnityが作ったexeが置き換えられます。
 5. 出来上がった **.exe** の拡張子を **.scr** に変更する
 6. 完成！
 
 自分の Unity に導入する手順:
 
-- Unity プロジェクトのルートより2階層下のフォルダーにソリューションをコピー
-  (例: /ExternalPrograms/Windows/UnityScreenSaverLauncher.sln)
+- Unity プロジェクトのルートより3階層下のフォルダーにソリューションをコピー
+  (例: /ExternalPrograms/Windows/UnityScreenSaverLauncher/UnityScreenSaverLauncher.sln)
 - ソリューションの中に*プロジェクト*が1つある。
   このプロジェクトの名前を Unity プロジェクトの Product Name と同じにする。
 

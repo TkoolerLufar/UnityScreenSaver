@@ -24,21 +24,21 @@ see **Quit()** method on **Assets/QuitTimerScript.cs**.
 Files for Windows
 -----------------
 
-I made a screen saver launcher for Windows on ExternalPrograms/Windows.
+I made a screen saver launcher for Windows on ExternalPrograms/Windows/UnityScreenSaverLauncher.
 
 How to build:
 
 1. Prepare your Visual Studio with ".NET Desktop development" feature.
 2. Open this Unity project on Unity and build it in *Build/Windows*.
-3. Open *ExternalPrograms/Windows/UnityScreenSaverLauncher.sln*.
+3. Open *ExternalPrograms/Windows/UnityScreenSaverLauncher/UnityScreenSaverLauncher.sln*.
 4. **Publish** the solution. An exe by Unity will be replaced by this step.
 5. Change the extension of the replaced **.exe** to **.scr**.
 6. Complete!
 
 When you use the solution with your Unity project, make sure:
 
-- Put on a folder 2-level below the Unity project root.
-  (for example: /ExternalPrograms/Windows/UnityScreenSaverLauncher.sln)
+- Put on a folder 3-level below the Unity project root.
+  (for example: /ExternalPrograms/Windows/UnityScreenSaverLauncher/UnityScreenSaverLauncher.sln)
 - There is a *project* in the solution.
   Change the project's name as same as the Unity Project's product name.
 
