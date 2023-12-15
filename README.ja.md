@@ -1,0 +1,48 @@
+UnityScreenSaver
+================
+
+Unity でスクリーンセーバーを作れる？
+
+----
+
+Android用のファイル
+-------------------
+
+Android スクリーンセーバー（通称Daydream、なおVRプラットフォームではない）
+をビルドするには以下のファイルを使います。
+
+- Assets/
+  - Plugins/
+    - Android/
+      - AndroidManifest.xml
+      - UnityPlayerDreamService.kt
+      - UnityPlayerDream.kt
+
+この Daydream はC#のマネージドコードで閉じれます。コード例は
+**Assets/QuitTimerScript.cs** の **Quit()** をご覧ください。
+
+Windows用のファイル
+-------------------
+
+Windowsスクリーンセーバーのランチャーを ExternalPrograms/Windows 以下に作りました。
+
+ビルド手順:
+
+1. あらかじめ Visual Studio に ".NET デスクトップ開発" 機能を入れておく
+2. このUnityプロジェクトをUnityで開いて *Build/Windows* にビルド
+3. *ExternalPrograms/Windows/UnityScreenSaverLauncher.sln* を開く
+4. そのソリューションを**発行**する。これでUnityが作ったexeが置き換えられます。
+5. 出来上がった **.exe** の拡張子を **.scr** に変更する
+6. 完成！
+
+自分の Unity に導入する手順:
+
+- Unity プロジェクトのルートより2階層下のフォルダーにソリューションをコピー
+  (例: /ExternalPrograms/Windows/UnityScreenSaverLauncher.sln)
+- ソリューションの中に*プロジェクト*が1つある。
+  このプロジェクトの名前を Unity プロジェクトの Product Name と同じにする。
+
+License
+-------
+
+MIT
