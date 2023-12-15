@@ -2,7 +2,7 @@ using Microsoft.Win32;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace UnityScreenSaverLauncherCs
+namespace UnityScreenSaverLauncher
 {
     internal static class Program
     {
@@ -24,7 +24,7 @@ namespace UnityScreenSaverLauncherCs
 
             var firstArg = args[0].ToUpper();
 
-            // Show config window from screen property
+            // Show config window from screen saver settings
             if (firstArg.StartsWith("/C"))
             {
                 var hWnd = nint.Parse(firstArg.StartsWith("/C:") ? firstArg[3..] : args[1]);
@@ -47,7 +47,7 @@ namespace UnityScreenSaverLauncherCs
             // Start screen saver
             if (firstArg == "/S") {
                 SetPreviewModeToPlayerPrefs(false);
-                var unityArgs = $"-screen-fullscreen 1 -window-mode borderless";
+                var unityArgs = "-screen-fullscreen 1 -window-mode borderless";
                 if (Screen.PrimaryScreen is Screen primaryScreen)
                 {
                     unityArgs = $"{unityArgs} -screen-width {primaryScreen.Bounds.Width} -screen-height {primaryScreen.Bounds.Height}";
@@ -59,10 +59,15 @@ namespace UnityScreenSaverLauncherCs
             return ShowConfig(nint.Zero);
         }
 
+        /// <summary>
+        /// Show a config UI.
+        /// </summary>
+        /// <param name="hWnd"></param>
+        /// <returns></returns>
         static int ShowConfig(nint hWnd)
         {
             MessageBox.Show(NativeWindow.FromHandle(hWnd),
-                "This screen saver has no configuration features.", "Unity Screen Saver");
+                "This screen saver has no options that you can set.", "Unity Screen Saver");
             return 0;
         }
 
@@ -89,6 +94,14 @@ namespace UnityScreenSaverLauncherCs
             }
         }
 
+        /// <summary>
+        /// The entry point to Unity.
+        /// </summary>
+        /// <param name="hInstance">Instance of the parent process.</param>
+        /// <param name="hPrevInstance">Unused since Win32.</param>
+        /// <param name="lpCmdLine">Command line arguments.</param>
+        /// <param name="nShowCmd">Prefered window mode.</param>
+        /// <returns>The exit code.</returns>
         [DllImport("UnityPlayer.dll", CallingConvention = CallingConvention.StdCall)]
         extern static int UnityMain(IntPtr hInstance, IntPtr hPrevInstance, [MarshalAs(UnmanagedType.LPWStr)] string lpCmdLine, int nShowCmd);
     }
