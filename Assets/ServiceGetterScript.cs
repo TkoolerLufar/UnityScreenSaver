@@ -22,8 +22,15 @@ public class ServiceGetterScript : MonoBehaviour
         else {
             TextMesh.text = "Android Screen Saver Failed";
         }
-        #else
-        TextMesh.text = "ahya";
+        #elif UNITY_STANDALONE_WIN
+        if (PlayerPrefs.GetInt("isPreview") != 0)
+        {
+            TextMesh.text = "Preview";
+        }
+        else
+        {
+            TextMesh.text = "Windows Screen Saver Running";
+        }
         #endif
     }
 }
