@@ -1,9 +1,0 @@
-{
-  "profiles": {
-    "UnityScreenSaverLauncherCs": {
-      "commandName": "Project",
-      "commandLineArgs": "/S",
-      "workingDirectory": "$(SolutionDir)\\..\\..\\..\\Build\\Windows"
-    }
-  }
-}
