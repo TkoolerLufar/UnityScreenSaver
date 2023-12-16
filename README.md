@@ -30,7 +30,7 @@ I made a screen saver launcher for Windows on ExternalPrograms/Windows/UnityScre
 
 How to build:
 
-1. Prepare your Visual Studio with ".NET Desktop development" feature.
+1. Prepare your Visual Studio with ".NET desktop development" feature.
 2. Open this Unity project on Unity and build it in *Build/Windows*.
 3. Open *ExternalPrograms/Windows/UnityScreenSaverLauncher/UnityScreenSaverLauncher.sln*.
 4. **Publish** the solution. An exe by Unity will be replaced by this step.
