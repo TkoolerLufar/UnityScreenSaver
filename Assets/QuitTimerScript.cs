@@ -26,12 +26,13 @@ public class QuitTimerScript : MonoBehaviour
             return;
         }
 
-        // Quit if the screen is be touched
+        // Quit when the screen is touched
         if (Input.touchCount > 0)
         {
             Quit();
         }
 
+        // Quit when the mouse is moving
         var currentMousePosition = Input.mousePosition;
         try
         {
@@ -45,6 +46,12 @@ public class QuitTimerScript : MonoBehaviour
         finally
         {
             prevMousePosition = currentMousePosition;
+        }
+
+        // Quit when any key or mouse button is pressed
+        if (Input.anyKey)
+        {
+            Quit();
         }
     }
 
