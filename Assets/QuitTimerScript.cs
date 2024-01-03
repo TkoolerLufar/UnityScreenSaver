@@ -7,6 +7,7 @@ public class QuitTimerScript : MonoBehaviour
 {
     public float QuitSecondsAfterBoot;
     private Vector3 prevMousePosition = Vector3.left;
+    private bool isQuitting = false;
 
     // Start is called before the first frame update
     void Start()
@@ -57,9 +58,29 @@ public class QuitTimerScript : MonoBehaviour
         Quit();
     }
 
+    /// <summary>
+    /// Try to quit this screen saver.
+    /// This function does nothing after once success.
+    /// </summary>
     void Quit()
     {
-#if !UNITY_EDITOR && UNITY_ANDROID
+        if (this.isQuitting)
+        {
+            return;
+        }
+        QuitApplication();
+        this.isQuitting = true;
+    }
+
+    /// <summary>
+    /// Quit this screen saver. Throw something if it fails.
+    /// </summary>
+    void QuitApplication()
+    {
+#if UNITY_EDITOR
+        // Only log and do nothing else in editor
+        Debug.Log("Quit!");
+#elif UNITY_ANDROID
         var currentService =
             new AndroidJavaClass("jp.tkoolerlufar.madewithunity.screensaver.UnityPlayerDream")
             .GetStatic<AndroidJavaObject>("Companion")
