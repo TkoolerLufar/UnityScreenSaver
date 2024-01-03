@@ -19,4 +19,8 @@
     <DebugType>none</DebugType>
   </PropertyGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="IF EXIST &quot;$(OutputPath)$(AssemblyName).scr&quot; DEL &quot;$(OutputPath)$(AssemblyName).scr&quot;&#xD;&#xA;RENAME &quot;$(OutputPath)$(AssemblyName).exe&quot; &quot;$(AssemblyName).scr&quot;" />
+  </Target>
+
 </Project>
