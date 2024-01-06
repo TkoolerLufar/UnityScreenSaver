@@ -10,6 +10,9 @@ public class QuitTimerScript : MonoBehaviour
     /// </summary>
     private static readonly Vector3 MouseNotCaptured = Vector3.left;
 
+    /// <summary>
+    /// If non-zero, the screen saver quits specified seconds after start.
+    /// </summary>
     public float QuitSecondsAfterBoot;
     private Vector3 prevMousePosition = MouseNotCaptured;
     private bool isQuitting = false;
