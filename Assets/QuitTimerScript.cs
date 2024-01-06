@@ -5,8 +5,13 @@ using UnityEngine;
 
 public class QuitTimerScript : MonoBehaviour
 {
+    /// <summary>
+    /// prevMousePosition is initialized as this invalid position.
+    /// </summary>
+    private static readonly Vector3 MouseNotCaptured = Vector3.left;
+
     public float QuitSecondsAfterBoot;
-    private Vector3 prevMousePosition = Vector3.left;
+    private Vector3 prevMousePosition = MouseNotCaptured;
     private bool isQuitting = false;
 
     // Start is called before the first frame update
@@ -37,7 +42,7 @@ public class QuitTimerScript : MonoBehaviour
         try
         {
             var mouseVelocity = currentMousePosition - prevMousePosition;
-            if (prevMousePosition != Vector3.left &&
+            if (prevMousePosition != MouseNotCaptured &&
             mouseVelocity != Vector3.zero)
             {
                 Quit();
