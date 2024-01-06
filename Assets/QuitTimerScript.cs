@@ -22,8 +22,8 @@ public class QuitTimerScript : MonoBehaviour
 
     void Update()
     {
-        // ぐるぐる回す
-        this.transform.eulerAngles += new Vector3(0.0F, 0.0F, 6.0F);
+        // Spin
+        this.transform.eulerAngles += new Vector3(0.0F, 0.0F, Time.deltaTime * 360.0F);
 
         bool isPreview = PlayerPrefs.GetInt("isPreview") != 0;
         if (isPreview)
