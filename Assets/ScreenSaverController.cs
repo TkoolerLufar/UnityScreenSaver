@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class QuitTimerScript : MonoBehaviour
+public class ScreenSaverController : MonoBehaviour
 {
     /// <summary>
     /// prevMousePosition is initialized as this invalid position.
@@ -11,25 +11,24 @@ public class QuitTimerScript : MonoBehaviour
     private static readonly Vector3 MouseNotCaptured = Vector3.left;
 
     /// <summary>
-    /// If non-zero, the screen saver quits specified seconds after start.
+    /// True if this is preview.
     /// </summary>
-    public float QuitSecondsAfterBoot;
+    public bool IsPreview
+    {
+        get =>
+#if UNITY_STANDALONE && !UNITY_EDITOR
+        PlayerPrefs.GetInt("isPreview") != 0
+#else
+        false
+#endif
+        ;
+    }
     private Vector3 prevMousePosition = MouseNotCaptured;
     private bool isQuitting = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        StartCoroutine(this.QuitTimerRoutine());
-    }
-
     void Update()
     {
-        // Spin
-        this.transform.eulerAngles += new Vector3(0.0F, 0.0F, Time.deltaTime * 360.0F);
-
-        bool isPreview = PlayerPrefs.GetInt("isPreview") != 0;
-        if (isPreview)
+        if (IsPreview)
         {
             return;
         }
@@ -61,16 +60,6 @@ public class QuitTimerScript : MonoBehaviour
         {
             Quit();
         }
-    }
-
-    IEnumerator<YieldInstruction> QuitTimerRoutine()
-    {
-        if (this.QuitSecondsAfterBoot <= 0.0F)
-        {
-            yield break;
-        }
-        yield return new WaitForSeconds(this.QuitSecondsAfterBoot);
-        Quit();
     }
 
     /// <summary>
