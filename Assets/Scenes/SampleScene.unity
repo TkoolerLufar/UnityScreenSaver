@@ -229,6 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf15e14c2f6ddf43b18433072d6eef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ScreenSaverController: {fileID: 1758329171}
   Canvas: {fileID: 1667197652}
 --- !u!1 &593901196
 GameObject:
