@@ -17,7 +17,8 @@ open class UnityPlayerDreamService : DreamService(), KeyEvent.Callback,
      *
      * It's defined for Unity native code.
      */
-    @JvmField @Deprecated("Prevent from using directly from Kotlin code")
+    @JvmField
+    @Deprecated("Prevent from using directly from Kotlin code")
     protected var mUnityPlayer: UnityPlayer? = null
 
     /**
