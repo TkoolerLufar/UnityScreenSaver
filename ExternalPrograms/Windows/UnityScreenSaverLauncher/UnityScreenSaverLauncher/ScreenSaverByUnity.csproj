@@ -6,7 +6,7 @@
     <UseWindowsForms>True</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <StartupObject>UnityScreenSaverLauncher.Program</StartupObject>
-    <RepositoryUrl>https://github.com/TkoolerLufar/ScreenSaverByUnity.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/TkoolerLufar/UnityScreenSaver.git</RepositoryUrl>
     <TargetFramework>net8.0-windows10.0.17763.0</TargetFramework>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
   </PropertyGroup>
