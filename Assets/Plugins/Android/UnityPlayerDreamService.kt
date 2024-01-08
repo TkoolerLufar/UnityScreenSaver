@@ -101,19 +101,19 @@ open class UnityPlayerDreamService : DreamService(), KeyEvent.Callback,
      * Stop animating the screen saver.
      */
     override fun onDreamingStopped() {
+        this.myUnityPlayer.unload()
         super.onDreamingStopped()
-        this.myUnityPlayer.pause()
     }
 
     /**
      * Tear down the screen saver.
      */
     override fun onDetachedFromWindow() {
-        // Detach me UnityPlayerDream
-        UnityPlayerDream.currentService = null
+        super.onDetachedFromWindow()
 
         this.myUnityPlayer.destroy()
-        super.onDetachedFromWindow()
+        // Detach me UnityPlayerDream
+        UnityPlayerDream.currentService = null
     }
 
     override fun onLowMemory() {
@@ -176,15 +176,12 @@ open class UnityPlayerDreamService : DreamService(), KeyEvent.Callback,
     }
 
     /**
-     * When Unity player unloaded stop the screensaver.
+     * When Unity player unloaded finish the screensaver.
      */
     override fun onUnityPlayerUnloaded() {
         this.finish()
     }
 
-    /**
-     * When Unity player calls Application.Quit() finish the screensaver.
-     */
     override fun onUnityPlayerQuitted() {
     }
 }
