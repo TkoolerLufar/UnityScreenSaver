@@ -20,7 +20,7 @@
   </PropertyGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="IF EXIST &quot;$(OutputPath)$(AssemblyName).scr&quot; DEL &quot;$(OutputPath)$(AssemblyName).scr&quot;&#xD;&#xA;RENAME &quot;$(OutputPath)$(AssemblyName).exe&quot; &quot;$(AssemblyName).scr&quot;" />
+    <Exec Command="IF &quot;$(Configuration)&quot;==&quot;Release&quot; (&#xD;&#xA;  IF EXIST &quot;$(OutputPath)$(AssemblyName).scr&quot; DEL &quot;$(OutputPath)$(AssemblyName).scr&quot;&#xD;&#xA;  RENAME &quot;$(OutputPath)$(AssemblyName).exe&quot; &quot;$(AssemblyName).scr&quot;&#xD;&#xA;)" />
   </Target>
 
 </Project>
