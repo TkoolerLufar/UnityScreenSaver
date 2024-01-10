@@ -27,7 +27,7 @@ namespace UnityScreenSaverLauncher
             // Show config window from screen saver settings
             if (firstArg.StartsWith("/C"))
             {
-                var hWnd = nint.Parse(firstArg.StartsWith("/C:") ? firstArg[3..] : args[1]);
+                var hWnd = args.Length > 1 ? nint.Parse(firstArg.StartsWith("/C:") ? firstArg[3..] : args[1]) : nint.Zero;
                 return ShowConfig(hWnd);
             }
 
