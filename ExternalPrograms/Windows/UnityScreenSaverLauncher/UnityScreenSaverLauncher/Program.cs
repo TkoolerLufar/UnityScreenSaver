@@ -79,20 +79,11 @@ namespace UnityScreenSaverLauncher
         {
             // Change the registry key by your Unity setting
             string regKey = @"Software\TkoolerLufar\ScreenSaverByUnity";
-            var playerPrefs = Registry.CurrentUser.OpenSubKey(regKey, true);
-            if (playerPrefs is null)
-            {
-                playerPrefs = Registry.CurrentUser.CreateSubKey(regKey, true);
-            }
-            try
-            {
+            using var playerPrefs =
+                Registry.CurrentUser.OpenSubKey(regKey, true) ??
+                Registry.CurrentUser.CreateSubKey(regKey, true);
                 playerPrefs.SetValue("isPreview", isPreview ? 1 : 0, RegistryValueKind.DWord);
             }
-            finally
-            {
-                playerPrefs.Close();
-            }
-        }
 
         /// <summary>
         /// The entry point to Unity.
