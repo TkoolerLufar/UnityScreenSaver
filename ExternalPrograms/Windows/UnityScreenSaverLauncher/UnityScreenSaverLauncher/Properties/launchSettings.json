@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "Show": {
+      "commandName": "Project",
+      "commandLineArgs": "/S",
+      "workingDirectory": "..\\..\\..\\..\\Build\\Windows"
+    },
+    "Configure": {
+      "commandName": "Project",
+      "commandLineArgs": "/C",
+      "workingDirectory": "..\\..\\..\\..\\Build\\Windows"
+    }
+  }
+}
