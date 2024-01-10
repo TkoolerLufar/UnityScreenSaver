@@ -28,7 +28,7 @@ public class ScreenSaverBuildScript
             // Modify project settings
             var propertyGroup = csproj.Elements("Project").Elements("PropertyGroup").First();
             propertyGroup.SetElementValue("Company", PlayerSettings.companyName);
-            propertyGroup.SetElementValue("AssemblyName", PlayerSettings.productName);
+            propertyGroup.SetElementValue("Product", PlayerSettings.productName);
             propertyGroup.SetElementValue("AssemblyVersion", $"{PlayerSettings.bundleVersion}");
             csproj.Save(LauncherProjectPath);
         }

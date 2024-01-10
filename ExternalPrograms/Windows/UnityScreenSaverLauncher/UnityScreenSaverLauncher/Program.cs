@@ -80,7 +80,7 @@ namespace UnityScreenSaverLauncher
         static void SetPreviewModeToPlayerPrefs(bool isPreview)
         {
             var assembly = Assembly.GetExecutingAssembly();
-            string productName = assembly.GetName().Name!;
+            string productName = assembly.GetCustomAttribute<AssemblyProductAttribute>()!.Product;
             string companyName = assembly.GetCustomAttribute<AssemblyCompanyAttribute>()!.Company;
 
             // Change the registry key by your Unity setting
@@ -99,7 +99,23 @@ namespace UnityScreenSaverLauncher
         /// <param name="lpCmdLine">Command line arguments.</param>
         /// <param name="nShowCmd">Prefered window mode.</param>
         /// <returns>The exit code.</returns>
-        [DllImport("UnityPlayer.dll", CallingConvention = CallingConvention.StdCall)]
-        extern static int UnityMain(IntPtr hInstance, IntPtr hPrevInstance, [MarshalAs(UnmanagedType.LPWStr)] string lpCmdLine, int nShowCmd);
+        static int UnityMain(IntPtr hInstance, IntPtr hPrevInstance, [MarshalAs(UnmanagedType.LPWStr)] string lpCmdLine, int nShowCmd)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            string productName = assembly.GetCustomAttribute<AssemblyProductAttribute>()!.Product;
+
+            var process = Process.Start(new ProcessStartInfo
+            {
+                FileName = $"{productName}.exe",
+                WindowStyle = ProcessWindowStyle.Normal,
+                Arguments = lpCmdLine,
+            });
+            if (process is null)
+            {
+                return 1;
+            }
+            process.WaitForExit();
+            return process.ExitCode;
+        }
     }
 }
