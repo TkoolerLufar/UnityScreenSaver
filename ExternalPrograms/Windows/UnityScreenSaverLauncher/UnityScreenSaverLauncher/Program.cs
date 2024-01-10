@@ -45,7 +45,8 @@ namespace UnityScreenSaverLauncher
             }
 
             // Start screen saver
-            if (firstArg == "/S") {
+            if (firstArg == "/S")
+            {
                 SetPreviewModeToPlayerPrefs(false);
                 var unityArgs = "-screen-fullscreen 1 -window-mode borderless";
                 if (Screen.PrimaryScreen is Screen primaryScreen)
