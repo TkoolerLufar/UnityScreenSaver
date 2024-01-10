@@ -1,5 +1,6 @@
 using Microsoft.Win32;
 using System.Diagnostics;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace UnityScreenSaverLauncher
@@ -78,13 +79,17 @@ namespace UnityScreenSaverLauncher
         /// <param name="isPreview">true when this is preview</param>
         static void SetPreviewModeToPlayerPrefs(bool isPreview)
         {
+            var assembly = Assembly.GetExecutingAssembly();
+            string productName = assembly.GetName().Name!;
+            string companyName = assembly.GetCustomAttribute<AssemblyCompanyAttribute>()!.Company;
+
             // Change the registry key by your Unity setting
-            string regKey = @"Software\TkoolerLufar\ScreenSaverByUnity";
+            string regKey = @$"Software\{companyName}\{productName}";
             using var playerPrefs =
                 Registry.CurrentUser.OpenSubKey(regKey, true) ??
                 Registry.CurrentUser.CreateSubKey(regKey, true);
-                playerPrefs.SetValue("isPreview", isPreview ? 1 : 0, RegistryValueKind.DWord);
-            }
+            playerPrefs.SetValue("isPreview", isPreview ? 1 : 0, RegistryValueKind.DWord);
+        }
 
         /// <summary>
         /// The entry point to Unity.
