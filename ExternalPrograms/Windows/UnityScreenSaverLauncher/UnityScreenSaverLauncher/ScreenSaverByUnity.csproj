@@ -1,5 +1,5 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <Nullable>enable</Nullable>
@@ -9,18 +9,18 @@
     <RepositoryUrl>https://github.com/TkoolerLufar/UnityScreenSaver.git</RepositoryUrl>
     <TargetFramework>net8.0-windows10.0.17763.0</TargetFramework>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <AssemblyName>ScreenSaverByUnity</AssemblyName>
+    <Company>TkoolerLufar</Company>
+    <RootNamespace>UnityScreenSaverLauncher</RootNamespace>
+    <AssemblyVersion>0.1.0</AssemblyVersion>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>portable</DebugType>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>none</DebugType>
   </PropertyGroup>
-
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="IF &quot;$(Configuration)&quot;==&quot;Release&quot; (&#xD;&#xA;  IF EXIST &quot;$(OutputPath)$(AssemblyName).scr&quot; DEL &quot;$(OutputPath)$(AssemblyName).scr&quot;&#xD;&#xA;  RENAME &quot;$(OutputPath)$(AssemblyName).exe&quot; &quot;$(AssemblyName).scr&quot;&#xD;&#xA;)" />
   </Target>
-
 </Project>
