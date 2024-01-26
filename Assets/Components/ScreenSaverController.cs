@@ -85,18 +85,18 @@ public class ScreenSaverController : MonoBehaviour
         // Only log and do nothing else in editor
         Debug.Log("Quit!");
 #elif UNITY_ANDROID
-        var currentService =
-            new AndroidJavaClass("jp.tkoolerlufar.madewithunity.screensaver.UnityPlayerDream")
-            .GetStatic<AndroidJavaObject>("Companion")
-            .Call<AndroidJavaObject>("getCurrentService");
-        if (currentService is not null) {
+        using var UnityPlayerDream = new AndroidJavaClass("jp.tkoolerlufar.madewithunity.screensaver.UnityPlayerDream");
+        using var UnityPlayerDreamCompanion = UnityPlayerDream.GetStatic<AndroidJavaObject>("Companion");
+        using var currentService = UnityPlayerDreamCompanion.Call<AndroidJavaObject>("getCurrentService");
+        if (currentService is not null)
+        {
             currentService.Call("finish");
             return;
         }
-        var currentActivity =
-            new AndroidJavaClass("com.unity3d.player.UnityPlayer")
-            .GetStatic<AndroidJavaObject>("currentActivity");
-        if (currentActivity is not null) {
+        using var unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+        using var currentActivity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+        if (currentActivity is not null)
+        {
             currentActivity.Call<bool>("moveTaskToBack", true);
             return;
         }
