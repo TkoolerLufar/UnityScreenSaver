@@ -54,7 +54,7 @@ namespace UnityScreenSaverLauncher
                 {
                     unityArgs = $"{unityArgs} -screen-width {primaryScreen.Bounds.Width} -screen-height {primaryScreen.Bounds.Height}";
                 }
-                return UnityMain(Process.GetCurrentProcess().Handle, nint.Zero,
+                return RunAsChildProcess(Process.GetCurrentProcess().Handle, nint.Zero,
                     unityArgs, 1);
             }
 
@@ -92,14 +92,25 @@ namespace UnityScreenSaverLauncher
         }
 
         /// <summary>
-        /// The entry point to Unity.
+        /// Run Unity Player as this process.
         /// </summary>
         /// <param name="hInstance">Instance of the parent process.</param>
         /// <param name="hPrevInstance">Unused since Win32.</param>
         /// <param name="lpCmdLine">Command line arguments.</param>
         /// <param name="nShowCmd">Prefered window mode.</param>
         /// <returns>The exit code.</returns>
-        static int UnityMain(IntPtr hInstance, IntPtr hPrevInstance, [MarshalAs(UnmanagedType.LPWStr)] string lpCmdLine, int nShowCmd)
+        [DllImport("UnityPlayer.dll")]
+        static extern int UnityMain(nint hInstance, nint hPrevInstance, [MarshalAs(UnmanagedType.LPWStr)] string lpCmdLine, int nShowCmd);
+
+        /// <summary>
+        /// Run Unity Player as a child process.
+        /// </summary>
+        /// <param name="hInstance">Instance of the parent process.</param>
+        /// <param name="hPrevInstance">Unused since Win32.</param>
+        /// <param name="lpCmdLine">Command line arguments.</param>
+        /// <param name="nShowCmd">Prefered window mode.</param>
+        /// <returns>The exit code.</returns>
+        static int RunAsChildProcess(nint hInstance, nint hPrevInstance, string lpCmdLine, int nShowCmd)
         {
             var assembly = Assembly.GetExecutingAssembly();
             string productName = assembly.GetCustomAttribute<AssemblyProductAttribute>()!.Product;
