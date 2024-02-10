@@ -21,7 +21,7 @@ Android スクリーンセーバー（通称Daydream、なおVRプラットフ�
       - UnityPlayerDream.kt
 
 この Daydream はC#のマネージドコードで閉じれます。コード例は
-**Assets/QuitTimerScript.cs** の **Quit()** をご覧ください。
+**Assets/Assets/Components/ScreenSaverController.cs** の **Quit()** をご覧ください。
 
 Windows用のファイル
 -------------------
