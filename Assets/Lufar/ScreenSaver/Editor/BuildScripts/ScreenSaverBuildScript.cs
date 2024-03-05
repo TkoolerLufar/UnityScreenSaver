@@ -9,28 +9,31 @@ using System.Xml;
 using System.Xml.Linq;
 using UnityEditor.Build.Content;
 
-public class ScreenSaverBuildScript
+namespace Lufar.ScreenSaver.Editor.BuildScripts
 {
-    [PostProcessBuild]
-    public static void OnPostProcessBuild(BuildTarget target, string pathToBuiltProject)
+    public class ScreenSaverBuildScript
     {
-        if (target == BuildTarget.StandaloneWindows ||
-            target == BuildTarget.StandaloneWindows64)
+        [PostProcessBuild]
+        public static void OnPostProcessBuild(BuildTarget target, string pathToBuiltProject)
         {
-            /// Path to VC++ Solution for the launcher
-            string LauncherSolutionDir = Path.Combine(
-                Path.GetDirectoryName(Application.dataPath), "ExternalPrograms", "Windows", "UnityScreenSaverLauncher");
-            string LauncherProjectPath = Path.Combine(LauncherSolutionDir, "UnityScreenSaverLauncher", "ScreenSaverByUnity.csproj");
+            if (target == BuildTarget.StandaloneWindows ||
+                target == BuildTarget.StandaloneWindows64)
+            {
+                /// Path to VC++ Solution for the launcher
+                string LauncherSolutionDir = Path.Combine(
+                    Path.GetDirectoryName(Application.dataPath), "ExternalPrograms", "Windows", "UnityScreenSaverLauncher");
+                string LauncherProjectPath = Path.Combine(LauncherSolutionDir, "UnityScreenSaverLauncher", "ScreenSaverByUnity.csproj");
 
-            /// csproj project settings
-            var csproj = XDocument.Load(LauncherProjectPath);
+                /// csproj project settings
+                var csproj = XDocument.Load(LauncherProjectPath);
 
-            // Modify project settings
-            var propertyGroup = csproj.Elements("Project").Elements("PropertyGroup").First();
-            propertyGroup.SetElementValue("Company", PlayerSettings.companyName);
-            propertyGroup.SetElementValue("Product", PlayerSettings.productName);
-            propertyGroup.SetElementValue("AssemblyVersion", $"{PlayerSettings.bundleVersion}");
-            csproj.Save(LauncherProjectPath);
+                // Modify project settings
+                var propertyGroup = csproj.Elements("Project").Elements("PropertyGroup").First();
+                propertyGroup.SetElementValue("Company", PlayerSettings.companyName);
+                propertyGroup.SetElementValue("Product", PlayerSettings.productName);
+                propertyGroup.SetElementValue("AssemblyVersion", $"{PlayerSettings.bundleVersion}");
+                csproj.Save(LauncherProjectPath);
+            }
         }
     }
 }
