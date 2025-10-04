@@ -21,7 +21,7 @@ I made these files:
       - UnityPlayerDream.kt
 
 This Daydream can close itself by C# managed code. For example,
-see **Quit()** method on **Assets/QuitTimerScript.cs**.
+see **Quit()** method on **Assets/Components/ScreenSaverController.cs**.
 
 Files for Windows
 -----------------
